@@ -7,12 +7,21 @@ export function Signature() {
       viewBox="0 0 272.24402 55.52"
       className="h-16 w-auto"
     >
+      <style>
+        {`
+          @font-face {
+            font-family: 'Thesignature';
+            src: url('/fonts/Thesignature.woff2') format('woff2'),
+                url('/fonts/Thesignature.woff') format('woff');
+          }
+          text { font-family: 'Thesignature'; }
+        `}
+      </style>
       <g transform="translate(-140.94171,-39.672825)" stroke="none" strokeWidth={0}>
         <text
           x="141.02171"
           y="91.928825"
           fontSize="64"
-          fontFamily="Thesignature"
           fontWeight="400"
           textAnchor="start"
           fill="white"
