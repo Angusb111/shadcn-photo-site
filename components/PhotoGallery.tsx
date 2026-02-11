@@ -22,6 +22,8 @@ interface Photo {
   description: string;
   src: string;
   createdTime?: string;
+  width?: number;
+  height?: number;
 }
 
 interface Album {
