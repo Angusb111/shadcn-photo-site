@@ -159,7 +159,9 @@ export function FloatingBlobs({ isOpen }: { isOpen: boolean }) {
       {Array.from({ length: blobCount }).map((_, idx) => (
         <div
           key={idx}
-          ref={(el) => (blobsRef.current[idx] = el)}
+          ref={(el) => {
+            blobsRef.current[idx] = el;
+          }}
           className={`absolute size-[15vw] rounded-full blur-3xl origin-center ${
             blobGradients[idx % blobGradients.length]
           }`}
