@@ -103,7 +103,6 @@ export function PhotoGallery() {
   onOpenChange={() => setSelectedPhoto(null)}
 >
   <DialogContent
-    showCloseButton={false}
     className={`
       bg-black/0
       p-0
