@@ -7,8 +7,6 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Loader } from "@/components/Loader";
 import { FloatingBlobs } from "@/components/FloatingBlobs";
-import { DroneIcon } from "lucide-react";
-import { CameraIcon } from "lucide-react";
 
 import {
   Dialog,
@@ -62,7 +60,7 @@ export function PhotoGallery() {
       <FloatingBlobs isOpen={!!selectedPhoto} />
       <div className="relative z-10 p-4">
         <Tabs defaultValue={albums[0].id} className="space-y-6">
-          <TabsList className="overflow-x-auto bg-uu">
+          <TabsList className="overflow-x-auto bg-uu border">
             {albums.map((album) => (
               <TabsTrigger key={album.id} value={album.id}>
                 {album.name}
@@ -76,7 +74,7 @@ export function PhotoGallery() {
                 {album.photos.map((photo) => {
                   const fallback = photo.name.replace(/\.[^/.]+$/, "");
                   return (
-                    <motion.div key={photo.id} whileHover={{ scale: 1.03 }}>
+                    <motion.div key={photo.id} whileHover={{ scale: 1.015 }}>
                       <Card
                         className="overflow-hidden rounded-sm shadow-md cursor-pointer p-0"
                         onClick={() => setSelectedPhoto(photo)}
