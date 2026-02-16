@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 const coolvetica = localFont({
-  src: "../public/fonts/CoolveticaRg.otf",
+  src: "../public/fonts/CoolveticaRg.woff2",
   weight: "400",
   style: "normal",
   variable: "--font-coolvetica", // optional, lets you use Tailwind variable

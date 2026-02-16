@@ -1,3 +1,4 @@
+//components\PhotoGallery.tsx
 "use client";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -19,6 +20,8 @@ interface Photo {
   name: string;
   description: string;
   src: string;
+  thumb?: string | null;
+  full?: string | null;
   createdTime?: string;
   width?: number;
   height?: number;
@@ -60,7 +63,7 @@ export function PhotoGallery() {
       <FloatingBlobs isOpen={!!selectedPhoto} />
       <div className="relative z-10 p-4">
         <Tabs defaultValue={albums[0].id} className="space-y-6">
-          <TabsList className="overflow-x-auto bg-uu border">
+          <TabsList className="flex flex-wrap gap-2 bg-uu border h-auto">
             {albums.map((album) => (
               <TabsTrigger key={album.id} value={album.id}>
                 {album.name}
@@ -80,9 +83,9 @@ export function PhotoGallery() {
                         onClick={() => setSelectedPhoto(photo)}
                       >
                         <CardContent className="p-0">
-                          <div className="relative h-64 w-full">
+                          <div className="relative w-full aspect-[3/2]">
                             <Image
-                              src={photo.src}
+                              src={photo.thumb || photo.src}
                               alt={photo.description || fallback}
                               fill
                               className="object-cover"
@@ -113,20 +116,18 @@ export function PhotoGallery() {
   >
     {selectedPhoto && (
       <div
-        className="relative flex flex-col items-left justify-center 
-                   min-h-[80vh] max-h-[95vh] max-w-[95vw] p-4"
+        className="relative flex flex-col items-left justify-center min-h-[80vh] max-h-[95vh] max-w-[95vw] p-4"
       >
         {/* Image */}
         <div className="relative w-auto h-full flex justify-center items-center">
           <Image
-            src={selectedPhoto.src}
+            src={selectedPhoto.full || selectedPhoto.src}
             alt={selectedPhoto.description || selectedPhoto.name}
             width={selectedPhoto.width || 4000}
             height={selectedPhoto.height || 6000}
-            className="object-contain max-h-[80vh] max-w-[95vw] h-auto w-auto"
+            className="object-contain max-h-[80vh] max-w-[100vw] h-auto w-auto"
           />
         </div>
-
         {/* Caption */}
         <div className="mt-4 text-left text-white max-w-[95vw]">
           <DialogTitle className="text-lg sm:text-xl md:text-5xl opacity-90 font-normal coolvetica">

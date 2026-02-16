@@ -1,3 +1,4 @@
+// app/api/photos/route.ts
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
 
@@ -29,23 +30,52 @@ export async function GET() {
     folders.map(async (folder) => {
       const imagesRes = await drive.files.list({
         q: `'${folder.id}' in parents and mimeType contains 'image/' and trashed=false`,
-        fields: "files(id,name,description,createdTime)",
+        fields:
+          "files(id,name,description,createdTime,thumbnailLink,imageMediaMetadata)",
         orderBy: "createdTime desc",
         supportsAllDrives: true,
         includeItemsFromAllDrives: true,
       });
 
-      const photos = imagesRes.data.files?.map((file) => ({
-        id: file.id,
-        name: file.name,
-        description: file.description ?? "",
-        src: `https://drive.google.com/uc?id=${file.id}`,
-      }));
+      const photos =
+        imagesRes.data.files?.map((file) => {
+          const thumb = file.thumbnailLink
+            ? file.thumbnailLink.replace(/=s\d+/, "=s370")
+            : null;
+
+          const full = file.thumbnailLink
+            ? file.thumbnailLink.replace(/=s\d+/, "=s1200")
+            : `https://drive.google.com/uc?id=${file.id}`;
+
+          return {
+            id: file.id!,
+            name: file.name!,
+            description: file.description ?? "",
+            createdTime: file.createdTime ?? "",
+
+            // original file (can be huge)
+            src: `https://drive.google.com/uc?id=${file.id}`,
+
+            // fast small preview for grid
+            thumb,
+
+            // medium size for dialog
+            full,
+
+            width: file.imageMediaMetadata?.width
+              ? Number(file.imageMediaMetadata.width)
+              : undefined,
+
+            height: file.imageMediaMetadata?.height
+              ? Number(file.imageMediaMetadata.height)
+              : undefined,
+          };
+        }) ?? [];
 
       return {
-        id: folder.id,
-        name: folder.name,
-        photos: photos ?? [],
+        id: folder.id!,
+        name: folder.name!,
+        photos,
       };
     })
   );

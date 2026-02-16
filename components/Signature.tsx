@@ -11,8 +11,7 @@ export function Signature() {
         {`
           @font-face {
             font-family: 'Thesignature';
-            src: url('/fonts/Thesignature.woff2') format('woff2'),
-                url('/fonts/Thesignature.woff') format('woff');
+            src: url('/fonts/Thesignature.woff2') format('woff2');
           }
           text { font-family: 'Thesignature'; }
         `}

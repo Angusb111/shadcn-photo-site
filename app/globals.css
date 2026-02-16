@@ -106,7 +106,7 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
-  --input: var(--pulsar-glow);
+  --input: white;
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -138,7 +138,7 @@
   width: 120px !important;
   animation: sc3-2 3s ease-in-out infinite;
   animation-delay: -1s;
-  color: var(--pulsar-glow);
+  color: white;
 }
 
 @keyframes sc3-2 {
@@ -151,5 +151,4 @@
 
 .coolvetica {
   font-family: var(--font-coolvetica), sans-serif!important;
-
 }
